@@ -1,5 +1,5 @@
 
-with open('Day 1/input.txt') as f:
+with open('Day01/input.txt') as f:
     lines = [line for line in f]
 
 elvesfood = []
