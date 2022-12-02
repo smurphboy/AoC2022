@@ -11,11 +11,12 @@ for line in lines:
     else:
         totalfood = totalfood + int(line)
 
-print ('Part one = '+ str(max(elvesfood)))
-
 theset = frozenset(elvesfood)
 sortedset = sorted(theset, reverse=True)
 
 firstthree = sortedset[0] + sortedset[1] + sortedset[2]
-
+print ('Part One = '+ str(sortedset[0]))
 print ('Part Two = ' + str(firstthree))
+
+assert sortedset[0] == 65912
+assert firstthree == 195625
