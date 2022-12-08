@@ -70,4 +70,63 @@ for y, treeline in enumerate(forest):
         else:
             visibletrees.append([x,y,tree])
 
+scores = []
+for y, treeline in enumerate(forest):
+    for x, tree in enumerate(treeline):
+        leftscore = 0
+        rightscore = 0
+        upscore = 0
+        downscore = 0
+        if x == 0:
+            leftscore = 0
+        else:
+            lefttree = []
+            for idx in reversed(range(x)):
+                lefttree.append(forest[y][idx])
+            for ltree in lefttree:
+                if ltree < tree:
+                    leftscore = leftscore + 1
+                elif ltree >= tree:
+                    leftscore = leftscore + 1
+                    break
+        if x == len(treeline)-1:
+            rightscore = 0
+        else:
+            righttree = []
+            for idx in range(x+1,len(forest[0])):
+                righttree.append(forest[y][idx])
+            for rtree in righttree:
+                if rtree < tree:
+                    rightscore = rightscore + 1
+                elif rtree >= tree:
+                    rightscore = rightscore + 1
+                    break
+        if y == 0:
+            upscore = 0
+        else:
+            uptree = []
+            for idx in reversed(range(y)):
+                uptree.append(forest[idx][x])
+            for utree in uptree:
+                if utree < tree:
+                    upscore = upscore + 1
+                if utree >= tree:
+                    upscore = upscore + 1
+                    break
+        if y == len(forest[0])-1:
+            downscore = 0
+        else:
+            downtree = []
+            for idx in range(y+1, len(forest[0])):
+                downtree.append(forest[idx][x])
+            for dtree in downtree:
+                if dtree < tree:
+                    downscore = downscore + 1
+                if dtree >= tree:
+                    downscore = downscore + 1
+                    break
+        totalscore = leftscore * rightscore * upscore * downscore
+        scores.append([x,y,tree,leftscore,rightscore,upscore,downscore,totalscore])
+
 print ("Part One: ", str(len(visibletrees)))
+print ("Part Two: ", max(sublist[7] for sublist in scores))
